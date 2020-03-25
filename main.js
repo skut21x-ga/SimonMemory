@@ -1,43 +1,49 @@
-let activatedDiv = document.querySelectorAll(".border");
-let activatedTop = document.querySelector("#topShape");
-let activatedRight = document.querySelector("#rightShape");
-let activatedBottom = document.querySelector("#bottomShape");
-let activatedLeft = document.querySelector("#leftShape");
-let activatedTopBorder = document.querySelector("#topBorder");
-let activatedRightBorder = document.querySelector("#rightBorder");
-let activatedBottomBorder = document.querySelector("#bottomBorder");
-let activatedLeftBorder = document.querySelector("#leftBorder");
+let activatedDiv = document.querySelector(".inactive");
+let topColor = (activatedDiv.style.borderTopColor = "red");
+let rightColor = (activatedDiv.style.borderRightColor = "blue");
+let bottomColor = (activatedDiv.style.borderBottomColor = "gold");
+let leftColor = (activatedDiv.style.borderLeftColor = "green");
 
-// Hide ALL Activated Buttons on Start (or Reset)
-function resetbuttons() {
-  for (i = 0; i < 4; i++) {
-    activatedDiv[i].style.display = "none";
-  }
+// Testing ALL Button Activation
+function activateAll() {
+  topColor = activatedDiv.style.borderTopColor = "hotpink";
+  rightColor = activatedDiv.style.borderRightColor = "cornflowerblue";
+  bottomColor = activatedDiv.style.borderBottomColor = "lemonchiffon";
+  leftColor = activatedDiv.style.borderLeftColor = "lawngreen";
 }
-resetbuttons();
 
-// Functions for Activated buttons Lighting Up
+// Reset to Starter Colors
+function deactivateAll() {
+  topColor = activatedDiv.style.borderTopColor = "red";
+  rightColor = activatedDiv.style.borderRightColor = "blue";
+  bottomColor = activatedDiv.style.borderBottomColor = "yellow";
+  leftColor = activatedDiv.style.borderLeftColor = "green";
+  let msg = new SpeechSynthesisUtterance(
+    "Welcome to Simon. Please pay attention."
+  );
+  window.speechSynthesis.speak(msg);
+}
+
+// Individual Lightup Functions
 function displayTop() {
-  activatedTopBorder.style.display = "flex";
-  console.log("Top Activated!");
+  topColor = activatedDiv.style.borderTopColor = "hotpink";
 }
 
 function displayRight() {
-  activatedRightBorder.style.display = "flex";
-  console.log("Right Activated!");
+  rightColor = activatedDiv.style.borderRightColor = "cornflowerblue";
 }
 
 function displayBottom() {
-  activatedBottomBorder.style.display = "flex";
-  console.log("Bottom Activated!");
-}
-function displayLeft() {
-  activatedLeftBorder.style.display = "flex";
-  console.log("Left Activated!");
+  bottomColor = activatedDiv.style.borderBottomColor = "lemonchiffon";
 }
 
-//event listeners (mouseover for testing purposes. change!
-activatedTop.addEventListener("mouseover", displayTop);
-activatedRight.addEventListener("mouseover", displayRight);
-activatedBottom.addEventListener("mouseover", displayBottom);
-activatedLeft.addEventListener("mouseover", displayLeft);
+function displayLeft() {
+  leftColor = activatedDiv.style.borderLeftColor = "green";
+}
+
+// Event Listeners for Clicks on SIMON BOARD:
+// need to fix to be for border of DIV
+// activatedTop.addEventListener("mouseover", displayTop);
+// activatedRight.addEventListener("mouseover", displayRight);
+// activatedBottom.addEventListener("mouseover", displayBottom);
+// activatedLeft.addEventListener("mouseover", displayLeft);

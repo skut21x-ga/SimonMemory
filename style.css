@@ -67,13 +67,16 @@ body {
   margin-left: -5px;
   padding: 20px;
   box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 1);
+  /* no longer needed due to JS
   background-color: transparent;
   border-bottom-color: yellow;
   border-top-color: red;
   border-left-color: green;
   border-right-color: blue;
+  */
 }
 
+/* removed code:
 .activated {
   border-left: 200px solid transparent;
   border-right: 200px solid transparent;
@@ -89,8 +92,4 @@ body {
   padding: 20px;
   box-shadow: inset 2px 4px 5px 20px rgba(0, 0, 0, 0.5);
   background-color: transparent;
-  border-bottom-color: rgb(255, 255, 116);
-  border-top-color: rgba(254, 118, 115, 0.886);
-  border-left-color: rgba(135, 220, 132, 0.886);
-  border-right-color: rgba(122, 131, 255, 0.886);
-}
+} */
