@@ -36,8 +36,8 @@ function displayLeft() {
   console.log("Left Activated!");
 }
 
-//event listeners (click for testing purposes. change!
-activatedTop.addEventListener("click", displayTop);
-activatedRight.addEventListener("click", displayRight);
-activatedBottom.addEventListener("click", displayBottom);
-activatedLeft.addEventListener("click", displayLeft);
+//event listeners (mouseover for testing purposes. change!
+activatedTop.addEventListener("mouseover", displayTop);
+activatedRight.addEventListener("mouseover", displayRight);
+activatedBottom.addEventListener("mouseover", displayBottom);
+activatedLeft.addEventListener("mouseover", displayLeft);
