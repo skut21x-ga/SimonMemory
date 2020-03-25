@@ -40,39 +40,38 @@ function displayTop() {
   unclick();
   topColor = activatedDiv.style.borderTopColor = "hotpink";
   msg = new SpeechSynthesisUtterance("red");
-  window.speechSynthesis.speak(msg);
   setInterval(unclick, 600);
+  window.speechSynthesis.speak(msg);
 }
 function displayRight() {
   unclick();
   rightColor = activatedDiv.style.borderRightColor = "lightblue";
   msg = new SpeechSynthesisUtterance("blue");
-  window.speechSynthesis.speak(msg);
   setInterval(unclick, 600);
+  window.speechSynthesis.speak(msg);
 }
 function displayBottom() {
   unclick();
   bottomColor = activatedDiv.style.borderBottomColor = "yellow";
   msg = new SpeechSynthesisUtterance("yellow");
-  window.speechSynthesis.speak(msg);
   setInterval(unclick, 600);
+  window.speechSynthesis.speak(msg);
 }
 function displayLeft() {
   unclick();
   leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
   msg = new SpeechSynthesisUtterance("green");
-  window.speechSynthesis.speak(msg);
   setInterval(unclick, 600);
+  window.speechSynthesis.speak(msg);
 }
 
 function hardModeActivate() {
-  msg = new SpeechSynthesisUtterance("hard mode");
-  window.speechSynthesis.speak(msg);
+  msg = new SpeechSynthesisUtterance("hard mode activated");
   setInterval(unclick, 600);
+  window.speechSynthesis.speak(msg);
 }
 
 [
-  gridbox[1],
   gridbox[2],
   gridbox[3],
   gridbox[9],
