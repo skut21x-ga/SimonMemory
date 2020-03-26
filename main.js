@@ -10,6 +10,7 @@ let gridbox = document.querySelectorAll(".gridbox");
 let hardMode = document.querySelector(".hardMode");
 let computerValues = [];
 let playerValues = [];
+let hardModeStatus = false;
 
 //msg = new SpeechSynthesisUtterance("Welcome to Simon.");
 //window.speechSynthesis.speak(msg);
@@ -29,10 +30,12 @@ function deactivateAll() {
   rightColor = activatedDiv.style.borderRightColor = "blue";
   bottomColor = activatedDiv.style.borderBottomColor = "gold";
   leftColor = activatedDiv.style.borderLeftColor = "green";
-  msg = new SpeechSynthesisUtterance("game reset");
+  activatedDiv.setAttribute("id", "nonAnimatedDiv");
+  msg = new SpeechSynthesisUtterance("EASY MODE");
   //Best Voices: Daniel, Karen, Tessa (british)
   //https://codepen.io/matt-west/full/wGzuJ
   window.speechSynthesis.speak(msg);
+  hardModeStatus = false;
 }
 
 // Individual Lightup Functions
@@ -66,9 +69,13 @@ function displayLeft() {
 }
 
 function hardModeActivate() {
-  msg = new SpeechSynthesisUtterance("hard mode activated");
-  setInterval(unclick, 600);
-  window.speechSynthesis.speak(msg);
+  if (hardModeStatus == false) {
+    activatedDiv.setAttribute("id", "animatedDiv");
+    msg = new SpeechSynthesisUtterance("hard mode");
+    hardModeStatus = true;
+    setInterval(unclick, 600);
+    window.speechSynthesis.speak(msg);
+  }
 }
 
 [
@@ -139,9 +146,11 @@ function hardModeActivate() {
   element.addEventListener("click", displayLeft);
 });
 
+//easy mode button
 restartButton.addEventListener("click", deactivateAll);
 
-[gridbox[56], hardMode].forEach(function(element) {
+//hard mode button
+[hardMode].forEach(function(element) {
   element.addEventListener("click", hardModeActivate);
 });
 

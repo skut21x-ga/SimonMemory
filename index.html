@@ -5,13 +5,13 @@
     <title>The "Simon" Memory Game</title>
   </head>
   <body>
-    <div class="gameTitle">The "Simon" Memory Game</div>
+    <div class="gameTitle"><a>The 'Simon' Memory Game</a></div>
     <div class ="gameBackground">
     <div class="gameBox"></div>
       <div class="simonModule"><a id="gameButtonName"></a> 
-        <div id="playButtons" class="inactive">    
+        <div class="inactive" id="nonAnimatedDiv">    
           <div id="start" class="startButton"></div>
-          <div id="overlay" class="grid">
+          <div id="overlay">
             <script>
               for (var i = 0; i <= 63; i++) {
                 document.write('<div class="gridbox" value='+i+'>'+'</div>');
@@ -27,7 +27,7 @@
       </div>
     </div>
 </div>
-<div><button class="restart"><a>RESTART</a></button><button class="hardMode">HARD MODE</button></a></div>
+<div><button class="restart"><a>EASY MODE</a></button><button class="hardMode">HARD MODE</button></a></div>
     <script type="text/javascript" src="main.js"></script>
   </body>
 </html>

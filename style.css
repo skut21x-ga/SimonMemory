@@ -88,8 +88,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0px 0px 20px 5px black;
   background-color: white;
-  margin-top: -300px;
-  margin-left: 300px;
+  margin-top: 50px;
+  margin-left: -460px;
   position: fixed;
 }
 
@@ -99,8 +99,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0px 0px 20px 5px black;
   background-color: white;
-  margin-top: -300px;
-  margin-left: -450px;
+  margin-left: 330px;
   position: fixed;
 }
 
@@ -157,7 +156,12 @@ body {
     transform: rotate(360deg);
   }
 }
-.inactive {
+#animatedDiv {
   -webkit-animation: rotating 5s linear infinite;
   animation: rotating 5s linear infinite;
+}
+
+#nonAnimatedDiv {
+  -webkit-animation: "";
+  animation: "";
 }
