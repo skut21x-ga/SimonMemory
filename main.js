@@ -12,7 +12,7 @@ let easyMode = document.querySelector(".easyMode");
 let overlay = document.querySelector("#overlay");
 let gridbox = document.querySelectorAll(".gridbox");
 let hardMode = document.querySelector(".hardMode");
-let computerValues = [0];
+let computerValues = [];
 let playerValues = [];
 let hardModeStatus = false;
 let muted = 0;
@@ -22,6 +22,8 @@ let randomNumber = null;
 let round = 0;
 let startButton = document.querySelector(".starter");
 let gameinProgress = false;
+let highScroe = document.querySelector(".highscore");
+let highScore = 0;
 
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
@@ -52,8 +54,8 @@ function easyModeActivate() {
   scoreboard.textContent = "0" + score;
   gameinProgress = true;
   computerValues = [0];
-  playerValues = [0];
-  computerTurn(score);
+  playerValues = [];
+  computerTurn();
 }
 
 // Individual Lightup Functions (by User)
@@ -66,8 +68,8 @@ function displayTop() {
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
-    playerValues[score] == "red";
-    roundCheck(score);
+    playerValues.push("red");
+    roundCheck();
   }
 }
 function displayRight() {
@@ -79,8 +81,8 @@ function displayRight() {
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
-    playerValues[score] = "blue";
-    roundCheck(score);
+    playerValues.push("blue");
+    roundCheck();
   }
 }
 function displayBottom() {
@@ -92,8 +94,8 @@ function displayBottom() {
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
-    playerValues[score] = "yellow";
-    roundCheck(score);
+    playerValues.push("yellow");
+    roundCheck();
   }
 }
 
@@ -106,8 +108,8 @@ function displayLeft() {
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
-    playerValues[score] == "green";
-    roundCheck(score);
+    playerValues.push("green");
+    roundCheck();
   }
 }
 
@@ -120,8 +122,8 @@ function hardModeActivate() {
   hardModeStatus = true;
   gameinProgress = true;
   computerValues = [0];
-  playerValues = [0];
-  computerTurn(score);
+  playerValues = [];
+  computerTurn();
 }
 
 [
@@ -222,32 +224,32 @@ unmuteButton.addEventListener("click", unmute);
 
 // random color function
 
-function calculate(x) {
+function calculate(i) {
   randomNumber = Math.floor(Math.random(100) * 4);
   if (randomNumber == 0) {
-    computerValues[x] = "red";
+    computerValues[i] = "red";
   } else if (randomNumber == 1) {
-    computerValues[x] = "blue";
+    computerValues[i] = "blue";
   } else if (randomNumber == 2) {
-    computerValues[x] = "yellow";
+    computerValues[i] = "yellow";
   } else if (randomNumber == 3) {
-    computerValues[x] = "green";
+    computerValues[i] = "green";
   }
 }
 
 //function for computer to set and say it's one color @ start
-function computerTurn(score) {
-  if (computerValues[score] == 0) {
-    calculate(score);
-  }
-  if (computerValues[score] == "red") {
-    computerTop();
-  } else if (computerValues[score] == "blue") {
-    computerRight();
-  } else if (computerValues[score] == "yellow") {
-    computerBottom();
-  } else if (computerValues[score] == "green") {
-    computerLeft();
+function computerTurn() {
+  calculate(score);
+  for (let i = 0; i <= score; i++) {
+    if (computerValues[i] == "red") {
+      computerTop();
+    } else if (computerValues[i] == "blue") {
+      computerRight();
+    } else if (computerValues[i] == "yellow") {
+      computerBottom();
+    } else if (computerValues[i] == "green") {
+      computerLeft();
+    }
   }
 }
 
@@ -301,9 +303,9 @@ function startGame() {
   }
   gameinProgress = true;
   computerValues = [0];
-  playerValues = [0];
+  playerValues = [];
   score = 0;
-  computerTurn(score);
+  computerTurn();
 }
 
 //start game button listener
@@ -314,29 +316,32 @@ function startGame() {
 );
 
 //scoreboard functions
-function increaseScore(score) {
-  score += 1;
-  if (score < 10) {
-    scoreboard.textContent = "0" + score;
+function increaseScore(x) {
+  x += 1;
+  if (x < 10) {
+    scoreboard.textContent = "0" + x;
     scoreboard.style.marginLeft = "235px";
-  } else if (score < 20) {
-    scoreboard.textContent = score;
+  } else if (x < 20) {
+    scoreboard.textContent = x;
     scoreboard.style.marginLeft = "-36px";
-  } else if (score < 100) {
-    scoreboard.textContent = score;
+  } else if (x < 100) {
+    scoreboard.textContent = x;
     scoreboard.style.marginLeft = "-48px";
-  } else if (score >= 100) {
-    scoreboard.textContent = score;
+  } else if (x >= 100) {
+    scoreboard.textContent = x;
     scoreboard.style.marginLeft = "-60px";
   }
+  return x;
 }
 
 // next round win or lose logic
-function roundCheck(score) {
+function roundCheck(x) {
   if (playerValues.length == computerValues.length) {
     if (JSON.stringify(playerValues) == JSON.stringify(computerValues)) {
       console.log("Correct. Next Round");
-      computerTurn(score);
+      score = increaseScore(score);
+      playerValues = [];
+      computerTurn();
     } else {
       console.log("FAIL");
       score = 0;
@@ -346,6 +351,7 @@ function roundCheck(score) {
       msg = new SpeechSynthesisUtterance("You have failed");
       window.speechSynthesis.speak(msg);
       gameinProgress = false;
+      playerValues = [];
     }
   }
 }
