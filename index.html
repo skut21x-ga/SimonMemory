@@ -2,13 +2,14 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <title>The "Simon" Memory Game</title>
   </head>
   <body>
     <div class="gameTitle"><a>The 'Simon' Memory Game</a></div>
     <div class ="gameBackground">
     <div class="gameBox"></div>
-      <div class="simonModule"><a id="gameButtonName"></a> 
+      <div class="simonModule"><a id="gameButtonName"></a> <br><br><a class=scoreboard>00</a>
         <div class="inactive" id="nonAnimatedDiv">    
           <div id="start" class="startButton"></div>
           <div id="overlay">
@@ -28,6 +29,8 @@
     </div>
 </div>
 <div><button class="restart"><a>EASY MODE</a></button><button class="hardMode">HARD MODE</button></a></div>
+    <div><img class ="muteButton" src="mute.png" height="50px">
+      <img class ="unmuteButton" src="unmute.png" height="50px"></div>
     <script type="text/javascript" src="main.js"></script>
   </body>
 </html>

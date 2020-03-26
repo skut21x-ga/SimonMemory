@@ -12,10 +12,8 @@ Grid DIV itterator code based on help at:
 https://codereview.stackexchange.com/questions/157895/create-multiple-divs-inside-a-containing-div
 document.write('<div class="gridbox" value='+i+'>'+ i.toString() + '</div>');
 
-for(let i=0;i<4;i++)
-{
-[gridbox[i],gridbox[i+8],gridbox[i+16],gridbox[i+24]].foreach(function (element)
-{
-element.addEventListener("click", displayTop);
-});
-}
+Setup 4 DIVS if have time instead of gridding
+
+Bonus
+Add timer-based scoring
+Track scores across games (even if the page is reloaded)

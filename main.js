@@ -11,6 +11,7 @@ let hardMode = document.querySelector(".hardMode");
 let computerValues = [];
 let playerValues = [];
 let hardModeStatus = false;
+let muted = 0;
 
 //msg = new SpeechSynthesisUtterance("Welcome to Simon.");
 //window.speechSynthesis.speak(msg);
@@ -34,7 +35,9 @@ function deactivateAll() {
   msg = new SpeechSynthesisUtterance("EASY MODE");
   //Best Voices: Daniel, Karen, Tessa (british)
   //https://codepen.io/matt-west/full/wGzuJ
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
   hardModeStatus = false;
 }
 
@@ -44,28 +47,36 @@ function displayTop() {
   topColor = activatedDiv.style.borderTopColor = "hotpink";
   msg = new SpeechSynthesisUtterance("red");
   setInterval(unclick, 600);
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
 }
 function displayRight() {
   unclick();
   rightColor = activatedDiv.style.borderRightColor = "lightblue";
   msg = new SpeechSynthesisUtterance("blue");
   setInterval(unclick, 600);
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
 }
 function displayBottom() {
   unclick();
   bottomColor = activatedDiv.style.borderBottomColor = "yellow";
   msg = new SpeechSynthesisUtterance("yellow");
   setInterval(unclick, 600);
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
 }
 function displayLeft() {
   unclick();
   leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
   msg = new SpeechSynthesisUtterance("green");
   setInterval(unclick, 600);
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
 }
 
 function hardModeActivate() {
@@ -74,7 +85,9 @@ function hardModeActivate() {
     msg = new SpeechSynthesisUtterance("hard mode");
     hardModeStatus = true;
     setInterval(unclick, 600);
-    window.speechSynthesis.speak(msg);
+    if (muted == 0) {
+      window.speechSynthesis.speak(msg);
+    }
   }
 }
 
@@ -154,10 +167,27 @@ restartButton.addEventListener("click", deactivateAll);
   element.addEventListener("click", hardModeActivate);
 });
 
-/* Could have used this code to itterate, but it wouldnt be as exact:
-for (let i = 0; i < 4; i++) {
-  [gridbox[i], gridbox[i + 8], gridbox[i + 16], gridbox[i + 24]].foreach(
-    function(element) {
-      element.addEventListener("click", displayTop);
-    });}
-*/
+function mute() {
+  muteButton.style.display = "none";
+  unmuteButton.style.display = "block";
+  console.log("muted");
+  msg = new SpeechSynthesisUtterance("sound off");
+  window.speechSynthesis.speak(msg);
+  muted = 1;
+}
+
+function unmute() {
+  muteButton.style.display = "block";
+  unmuteButton.style.display = "none";
+  console.log("sound on");
+  msg = new SpeechSynthesisUtterance("sound on");
+  window.speechSynthesis.speak(msg);
+  muted = 0;
+}
+
+let muteButton = document.querySelector(".muteButton");
+let unmuteButton = document.querySelector(".unmuteButton");
+
+//mute button
+muteButton.addEventListener("click", mute);
+unmuteButton.addEventListener("click", unmute);
