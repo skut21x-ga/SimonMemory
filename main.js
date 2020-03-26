@@ -8,12 +8,12 @@ bottomColor.value = 2;
 let leftColor = (activatedDiv.style.borderLeftColor = "green");
 leftColor.value = 3;
 let msg = "";
-let restartButton = document.querySelector(".restart");
+let easyMode = document.querySelector(".easyMode");
 let overlay = document.querySelector("#overlay");
 let gridbox = document.querySelectorAll(".gridbox");
 let hardMode = document.querySelector(".hardMode");
 let computerValues = [0];
-let playerValues = [""];
+let playerValues = [];
 let hardModeStatus = false;
 let muted = 0;
 let score = 0;
@@ -23,11 +23,12 @@ let round = 0;
 let startButton = document.querySelector(".starter");
 let gameinProgress = false;
 
-//msg = new SpeechSynthesisUtterance("Welcome to Simon.");
-//window.speechSynthesis.speak(msg);
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
+msg = new SpeechSynthesisUtterance("Welcome");
+window.speechSynthesis.speak(msg);
 
+// Reset Board Colors
 function unclick() {
   topColor = activatedDiv.style.borderTopColor = "red";
   rightColor = activatedDiv.style.borderRightColor = "blue";
@@ -35,79 +36,92 @@ function unclick() {
   leftColor = activatedDiv.style.borderLeftColor = "green";
 }
 
-// Reset to Starter Colors
-function easyMode() {
+// Easy Mode Start
+function easyModeActivate() {
+  console.log("test");
   startButton.textContent = "START";
   topColor = activatedDiv.style.borderTopColor = "red";
   rightColor = activatedDiv.style.borderRightColor = "blue";
   bottomColor = activatedDiv.style.borderBottomColor = "gold";
   leftColor = activatedDiv.style.borderLeftColor = "green";
   activatedDiv.setAttribute("id", "nonAnimatedDiv");
-  msg = new SpeechSynthesisUtterance("EASY MODE");
-  //Best Voices: Daniel, Karen, Tessa (british)
-  //https://codepen.io/matt-west/full/wGzuJ
   scoreboard.style.display = "block";
   startButton.style.display = "none";
-  if (muted == 0) {
-    window.speechSynthesis.speak(msg);
-  }
   hardModeStatus = false;
   score = 0;
   scoreboard.textContent = "0" + score;
-  gameinProgress = false;
+  gameinProgress = true;
+  computerValues = [0];
+  playerValues = [0];
+  computerTurn(score);
 }
 
 // Individual Lightup Functions (by User)
 function displayTop() {
   unclick();
-  topColor = activatedDiv.style.borderTopColor = "hotpink";
-  msg = new SpeechSynthesisUtterance("red");
-  setInterval(unclick, 600);
-  if (muted == 0) {
-    window.speechSynthesis.speak(msg);
+  if (gameinProgress == true) {
+    topColor = activatedDiv.style.borderTopColor = "hotpink";
+    msg = new SpeechSynthesisUtterance("red");
+    setInterval(unclick, 1000);
+    if (muted == 0) {
+      window.speechSynthesis.speak(msg);
+    }
+    playerValues[score] == "red";
+    roundCheck(score);
   }
 }
 function displayRight() {
   unclick();
-  rightColor = activatedDiv.style.borderRightColor = "lightblue";
-  msg = new SpeechSynthesisUtterance("blue");
-  setInterval(unclick, 600);
-  if (muted == 0) {
-    window.speechSynthesis.speak(msg);
+  if (gameinProgress == true) {
+    rightColor = activatedDiv.style.borderRightColor = "lightblue";
+    msg = new SpeechSynthesisUtterance("blue");
+    setInterval(unclick, 1000);
+    if (muted == 0) {
+      window.speechSynthesis.speak(msg);
+    }
+    playerValues[score] = "blue";
+    roundCheck(score);
   }
 }
 function displayBottom() {
   unclick();
-  bottomColor = activatedDiv.style.borderBottomColor = "yellow";
-  msg = new SpeechSynthesisUtterance("yellow");
-  setInterval(unclick, 600);
-  if (muted == 0) {
-    window.speechSynthesis.speak(msg);
+  if (gameinProgress == true) {
+    bottomColor = activatedDiv.style.borderBottomColor = "yellow";
+    msg = new SpeechSynthesisUtterance("yellow");
+    setInterval(unclick, 1000);
+    if (muted == 0) {
+      window.speechSynthesis.speak(msg);
+    }
+    playerValues[score] = "yellow";
+    roundCheck(score);
   }
 }
+
 function displayLeft() {
   unclick();
-  leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
-  msg = new SpeechSynthesisUtterance("green");
-  setInterval(unclick, 600);
-  if (muted == 0) {
-    window.speechSynthesis.speak(msg);
+  if (gameinProgress == true) {
+    leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
+    msg = new SpeechSynthesisUtterance("green");
+    setInterval(unclick, 1000);
+    if (muted == 0) {
+      window.speechSynthesis.speak(msg);
+    }
+    playerValues[score] == "green";
+    roundCheck(score);
   }
 }
 
 function hardModeActivate() {
+  score = 0;
   activatedDiv.setAttribute("id", "animatedDiv");
   scoreboard.textContent = "0" + score;
-
   scoreboard.style.display = "block";
   startButton.style.display = "none";
-  msg = new SpeechSynthesisUtterance("hard mode");
   hardModeStatus = true;
-  setInterval(unclick, 600);
-  if (muted == 0) {
-    window.speechSynthesis.speak(msg);
-  }
-  gameinProgress = false;
+  gameinProgress = true;
+  computerValues = [0];
+  playerValues = [0];
+  computerTurn(score);
 }
 
 [
@@ -178,13 +192,8 @@ function hardModeActivate() {
   element.addEventListener("click", displayLeft);
 });
 
-//easy mode button
-restartButton.addEventListener("click", easyMode);
-
-//hard mode button
-[hardMode].forEach(function(element) {
-  element.addEventListener("click", hardModeActivate);
-});
+hardMode.addEventListener("click", hardModeActivate);
+easyMode.addEventListener("click", easyModeActivate);
 
 function mute() {
   muteButton.style.display = "none";
@@ -211,31 +220,10 @@ let unmuteButton = document.querySelector(".unmuteButton");
 muteButton.addEventListener("click", mute);
 unmuteButton.addEventListener("click", unmute);
 
-//scoreboard functions
-function increaseScore() {
-  if (computerValues == playerValues) {
-    score += 1;
-    if (score < 10) {
-      scoreboard.textContent = "0" + score;
-      scoreboard.style.marginLeft = "-48px";
-    } else if (score < 20) {
-      scoreboard.textContent = score;
-      scoreboard.style.marginLeft = "-36px";
-    } else if (score < 100) {
-      scoreboard.textContent = score;
-      scoreboard.style.marginLeft = "-48px";
-    } else if (score >= 100) {
-      scoreboard.textContent = score;
-      scoreboard.style.marginLeft = "-60px";
-    }
-  }
-}
-
 // random color function
 
 function calculate(x) {
   randomNumber = Math.floor(Math.random(100) * 4);
-  console.log(randomNumber);
   if (randomNumber == 0) {
     computerValues[x] = "red";
   } else if (randomNumber == 1) {
@@ -247,8 +235,11 @@ function calculate(x) {
   }
 }
 
+//function for computer to set and say it's one color @ start
 function computerTurn(score) {
-  calculate(score);
+  if (computerValues[score] == 0) {
+    calculate(score);
+  }
   if (computerValues[score] == "red") {
     computerTop();
   } else if (computerValues[score] == "blue") {
@@ -260,72 +251,103 @@ function computerTurn(score) {
   }
 }
 
-//test random color
-
 // functions for computer to display its colors
 
 function computerTop() {
   unclick();
   topColor = activatedDiv.style.borderTopColor = "hotpink";
   msg = new SpeechSynthesisUtterance("red");
-  setInterval(unclick, 2000);
+  setInterval(unclick, 1500);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
 }
-
 function computerRight() {
   unclick();
   rightColor = activatedDiv.style.borderRightColor = "lightblue";
   msg = new SpeechSynthesisUtterance("blue");
-  setInterval(unclick, 2000);
+  setInterval(unclick, 1500);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
 }
-
 function computerBottom() {
   unclick();
   bottomColor = activatedDiv.style.borderBottomColor = "yellow";
   msg = new SpeechSynthesisUtterance("yellow");
-  setInterval(unclick, 2000);
+  setInterval(unclick, 1500);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
 }
-
 function computerLeft() {
   unclick();
   leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
   msg = new SpeechSynthesisUtterance("green");
-  setInterval(unclick, 2000);
+  setInterval(unclick, 1500);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
 }
 
-increaseScore();
-
 function startGame() {
-  if (gameinProgress == false) {
-    startButton.style.display = "none";
+  startButton.style.display = "none";
 
-    msg = new SpeechSynthesisUtterance("3 . 2 . 1");
-    setInterval(unclick, 600);
-    scoreboard.style.display = "block";
-    if (muted == 0) {
-      window.speechSynthesis.speak(msg);
-    }
-    gameinProgress = true;
+  msg = new SpeechSynthesisUtterance("  .  .");
+  setInterval(unclick, 600);
+  scoreboard.style.display = "block";
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
   }
+  gameinProgress = true;
+  computerValues = [0];
+  playerValues = [0];
+  score = 0;
+  computerTurn(score);
 }
 
-//lose game logic here
-//
-//gameinProgress = false ;
-
+//start game button listener
 [gridbox[27], gridbox[28], gridbox[35], gridbox[36], startButton].forEach(
   function(element) {
     element.addEventListener("click", startGame);
   }
 );
+
+//scoreboard functions
+function increaseScore(score) {
+  score += 1;
+  if (score < 10) {
+    scoreboard.textContent = "0" + score;
+    scoreboard.style.marginLeft = "235px";
+  } else if (score < 20) {
+    scoreboard.textContent = score;
+    scoreboard.style.marginLeft = "-36px";
+  } else if (score < 100) {
+    scoreboard.textContent = score;
+    scoreboard.style.marginLeft = "-48px";
+  } else if (score >= 100) {
+    scoreboard.textContent = score;
+    scoreboard.style.marginLeft = "-60px";
+  }
+}
+
+// next round win or lose logic
+function roundCheck(score) {
+  if (playerValues.length == computerValues.length) {
+    if (JSON.stringify(playerValues) == JSON.stringify(computerValues)) {
+      console.log("Correct. Next Round");
+      computerTurn(score);
+    } else {
+      console.log("FAIL");
+      score = 0;
+      scoreboard.style.display = "none";
+      startButton.style.display = "block";
+      scoreboard.textContent = "0" + score;
+      msg = new SpeechSynthesisUtterance("You have failed");
+      window.speechSynthesis.speak(msg);
+      gameinProgress = false;
+    }
+  }
+}
+
+//win game logic? high score?

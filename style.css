@@ -80,7 +80,7 @@ body {
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 1);
 }
 
-.restart {
+.easyMode {
   height: 40px;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
@@ -93,6 +93,7 @@ body {
 
 .hardMode {
   height: 40px;
+  width: 140px;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0px 0px 20px 5px black;
@@ -206,7 +207,7 @@ body {
       -0.2vw 0vw 0.2vw #fed128, -0.1vw 0vw 3vw #f0130b, -0.2vw 0vw 3vw #f0130b,
       -0.4vw 0vw 3vw #f0130b, -0.1vw 0vw 5vw #f0130b, -0.2vw 0vw 5vw #f0130b,
       -0.4vw 0vw 0.8vw #f0130b, 0.2vw 0vw 10vw #f0130b;
-    color: #fed128;
+    color: rgb(255, 245, 170);
   }
   50% {
     text-shadow: -0.1vw 0vw 0.1vw #f9a006, -0.15vw 0vw 0.2vw #f9a006,
@@ -214,7 +215,7 @@ body {
       -0.2vw 0vw 0.1vw #a10b06, -0.4vw 0vw 0.1vw #a10b06,
       -0.1vw 0vw 0.2vw #a10b06, -0.2vw 0vw 0.2vw #a10b06,
       -0.4vw 0vw 0.2vw #a10b06, 0.2vw 0vw 0.5vw #a10b06;
-    color: #f9a006;
+    color: rgb(255, 212, 70);
   }
 }
 
