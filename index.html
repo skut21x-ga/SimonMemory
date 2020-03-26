@@ -9,9 +9,10 @@
     <div class="gameTitle"><a>The 'Simon' Memory Game</a></div>
     <div class ="gameBackground">
     <div class="gameBox"></div>
-      <div class="simonModule"><a id="gameButtonName"></a> <br><br><a class=scoreboard>00</a>
+      <div class="simonModule"><a id="gameButtonName"></a> <br><br><div class=scoreboard>00</div>
         <div class="inactive" id="nonAnimatedDiv">    
-          <div id="start" class="startButton"></div>
+          <div id="center" class="centerButton">    <button class = "starter">START</button>
+          </div>
           <div id="overlay">
             <script>
               for (var i = 0; i <= 63; i++) {
@@ -31,6 +32,7 @@
 <div><button class="restart"><a>EASY MODE</a></button><button class="hardMode">HARD MODE</button></a></div>
     <div><img class ="muteButton" src="mute.png" height="50px">
       <img class ="unmuteButton" src="unmute.png" height="50px"></div>
+
     <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
