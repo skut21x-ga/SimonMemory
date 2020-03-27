@@ -16,7 +16,7 @@ body {
 }
 
 .overlay {
-  /*should i keep this transformation to match the background */
+  /*transformationto match the background */
   transform: rotate(90deg);
 }
 
@@ -31,7 +31,7 @@ body {
 .gameTitle {
   font-family: "Orbitron";
   font-size: 30px;
-  width: 50%;
+  width: 600px;
   height: 120%;
   border: 2px solid black;
   box-shadow: 0px 0px 20px 5px black;
@@ -87,8 +87,8 @@ body {
   }
 }
 #animatedDiv {
-  -webkit-animation: rotating 3s linear infinite;
-  animation: rotating 3s linear infinite;
+  -webkit-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
 }
 
 #nonAnimatedDiv {
@@ -128,6 +128,7 @@ body {
   font-family: Orbitron;
   font-size: 60px;
   font-stretch: expanded;
+  margin-top: -2px;
   position: absolute;
   text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
   color: white;
@@ -136,12 +137,12 @@ body {
 
 .simonCircle {
   font-size: 40px;
-  position: fixed;
+  position: absolute;
   border: 1px solid black;
   border-radius: 100%;
   height: 150px;
   width: 150px;
-  box-shadow: 0px 0px 10px 15px black;
+  box-shadow: 0px 0px 10px 1px black;
   display: block;
   background-color: black;
 }
@@ -174,7 +175,7 @@ body {
   border-radius: 100%;
   height: 575px;
   width: 575px;
-  box-shadow: 0px 0px 20px 10px black;
+  box-shadow: 0px 0px 10px 5px black;
   display: block;
   margin-top: 293px;
   background-color: transparent;
@@ -188,19 +189,19 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  margin-top: 285px;
+  margin-top: 286px;
   background-color: transparent;
 }
 
 .startCircle {
   font-size: 30px;
-  text-shadow: 0px 1px 5px;
-  position: fixed;
+  text-shadow: 0px 0px 1px;
+  position: absolute;
   border: 1px solid black;
   border-radius: 100%;
   height: 150px;
   width: 150px;
-  box-shadow: 0px 0px 10px 15px black;
+  box-shadow: 0px 0px 5px 10px black;
   display: block;
 }
 
@@ -211,14 +212,14 @@ body {
   box-shadow: 0px 0px 20px 5px white;
   background-color: black;
   border: 2px solid black;
-  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
   color: white;
+  text-shadow: 0px 1px 1px white;
   margin-top: 50px;
   margin-left: -457px;
   position: absolute;
   -webkit-filter: invert(1);
-  width: 150px;
   filter: invert(1);
+  width: 150px;
 }
 
 .hardMode {
@@ -229,7 +230,7 @@ body {
   box-shadow: 0px 0px 20px 5px white;
   background-color: black;
   border: 2px solid black;
-  text-shadow: -0.1vw 0vw 0.1vw white, -0.1vw 0vw 3vw #f0130b;
+  text-shadow: 0px 1px 1px white;
   color: white;
   margin-left: 310px;
   margin-top: 50px;
@@ -239,7 +240,7 @@ body {
 }
 
 .easyHighScoreTitle {
-  margin-top: 780px;
+  margin-top: 765px;
   margin-left: -382px;
   font-size: 20px;
   position: absolute;
@@ -258,8 +259,8 @@ body {
 }
 
 .hardHighScoreTitle {
-  margin-top: 780px;
-  margin-left: 389px;
+  margin-top: 765px;
+  margin-left: 391px;
   font-size: 20px;
   position: absolute;
   color: white;
@@ -274,4 +275,30 @@ body {
   color: white;
   margin-left: 10px;
   padding-bottom: 40px;
+}
+
+.gameOverDiv {
+  background-color: black;
+  display: flex;
+  height: 100px;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0px 0px 5px 2px;
+  position: absolute;
+  margin-top: 325px;
+  text-shadow: 0px 0px 10px red;
+}
+
+.gameOver {
+  color: white;
+  font-size: 50px;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  text-align: left;
+  margin-left: -150px;
+  margin-top: 20px;
 }

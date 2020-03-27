@@ -27,10 +27,13 @@ let easyHighScoreField = document.querySelector(".easyHighScoreValue");
 let easyHighScoreValue = "";
 let hardHighScoreField = document.querySelector(".hardHighScoreValue");
 let hardHighScoreValue = "";
-localStorage.setItem("hardHighScoreValue", 5);
+localStorage.setItem("hardHighScoreValue", 4);
 localStorage.setItem("easyHighScoreValue", 7);
 easyHighScoreField.textContent = localStorage.easyHighScoreValue;
 hardHighScoreField.textContent = localStorage.hardHighScoreValue;
+var audio = "";
+let gameOver = document.querySelector(".gameOverDiv");
+gameOver.style.display = "none";
 
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
@@ -55,7 +58,9 @@ function easyModeActivate() {
   startButton.textContent = "START";
   unclick();
   let msg = new SpeechSynthesisUtterance("Easy Mode");
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
   overlay.setAttribute("id", "nonAnimatedDiv");
   scoreboard.style.display = "block";
   startButton.style.display = "none";
@@ -70,67 +75,69 @@ function easyModeActivate() {
 
 // Individual Lightup Functions (by User)
 function displayTop() {
-  unclick();
+  setTimeout(unclick, 500);
   if (gameinProgress == true) {
     topActiveColor.style.display = "block";
     topColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("red");
-    setInterval(unclick, 2000);
+    setTimeout(unclick, 500);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
     playerValues.push("red");
-    roundCheck();
+    setTimeout(roundCheck, 500);
   }
 }
 function displayRight() {
-  unclick();
+  setTimeout(unclick, 500);
   if (gameinProgress == true) {
     rightActiveColor.style.display = "block";
     rightColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("blue");
-    setInterval(unclick, 2000);
+    setTimeout(unclick, 500);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
     playerValues.push("blue");
-    roundCheck();
+    setTimeout(roundCheck, 500);
   }
 }
 function displayBottom() {
-  unclick();
+  setTimeout(unclick, 500);
   if (gameinProgress == true) {
     bottomActiveColor.style.display = "block";
     bottomColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("yellow");
-    setInterval(unclick, 2000);
+    setTimeout(unclick, 500);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
     playerValues.push("yellow");
-    roundCheck();
+    setTimeout(roundCheck, 500);
   }
 }
 
 function displayLeft() {
-  unclick();
+  setTimeout(unclick, 500);
   if (gameinProgress == true) {
     leftActiveColor.style.display = "block";
     leftColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("green");
-    setInterval(unclick, 1000);
+    setTimeout(unclick, 500);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
     playerValues.push("green");
-    roundCheck();
+    setTimeout(roundCheck, 500);
   }
 }
 
 function hardModeActivate() {
   score = 0;
   let msg = new SpeechSynthesisUtterance("Hard Mode");
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
   overlay.setAttribute("id", "animatedDiv");
   scoreboard.textContent = "0" + score;
   scoreboard.style.display = "block";
@@ -158,7 +165,9 @@ function mute() {
   unmuteButton.style.display = "block";
   console.log("muted");
   msg = new SpeechSynthesisUtterance("sound off");
-  window.speechSynthesis.speak(msg);
+  if (muted == 0) {
+    window.speechSynthesis.speak(msg);
+  }
   muted = 1;
 }
 
@@ -197,15 +206,17 @@ function calculate(i) {
 function computerTurn() {
   calculate(score);
   for (let i = 0; i <= score; i++) {
+    let variable = (i + 1) * 800;
     if (computerValues[i] == "red") {
-      computerTop();
+      setTimeout(computerTop, variable);
     } else if (computerValues[i] == "blue") {
-      computerRight();
+      setTimeout(computerRight, variable);
     } else if (computerValues[i] == "yellow") {
-      computerBottom();
+      setTimeout(computerBottom, variable);
     } else if (computerValues[i] == "green") {
-      computerLeft();
+      setTimeout(computerLeft, variable);
     }
+    console.log(variable);
   }
 }
 
@@ -215,7 +226,7 @@ function computerTop() {
   topActiveColor.style.display = "block";
   topColor.style.display = "none";
   msg = new SpeechSynthesisUtterance("red");
-  setInterval(unclick, 3000);
+  setTimeout(unclick, 650);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -227,7 +238,7 @@ function computerRight() {
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
-  setInterval(unclick, 3000);
+  setTimeout(unclick, 650);
 }
 function computerBottom() {
   bottomActiveColor.style.display = "block";
@@ -236,13 +247,13 @@ function computerBottom() {
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
-  setInterval(unclick, 3000);
+  setTimeout(unclick, 650);
 }
 function computerLeft() {
   leftActiveColor.style.display = "block";
   leftColor.style.display = "none";
   msg = new SpeechSynthesisUtterance("green");
-  setInterval(unclick, 3000);
+  setTimeout(unclick, 650);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -251,7 +262,7 @@ function computerLeft() {
 function startGame() {
   startButton.style.display = "none";
   msg = new SpeechSynthesisUtterance("Let's Begin with ");
-  setInterval(unclick, 200);
+  setTimeout(unclick, 200);
   scoreboard.style.display = "block";
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
@@ -287,30 +298,50 @@ function increaseScore(x) {
 // next round win or lose logic
 function roundCheck(x) {
   if (playerValues.length == computerValues.length) {
-    if (JSON.stringify(playerValues) == JSON.stringify(computerValues)) {
+    if (playerValues.join("") === computerValues.join("")) {
       console.log("Correct");
-      msg = new SpeechSynthesisUtterance("Correct.....");
-      window.speechSynthesis.speak(msg);
+      if (muted == 0) {
+        msg = new SpeechSynthesisUtterance("Correct");
+        window.speechSynthesis.speak(msg);
+      }
       score = increaseScore(score);
       checkHighScore();
       playerValues = [];
-      setInterval(computerTurn(), 2000);
+      setTimeout(computerTurn, 500);
     } else {
       console.log("FAIL");
+      gameOver.style.display = "block";
+      setTimeout(function() {
+        gameOver.style.display = "none";
+      }, 3500);
       checkHighScore();
       score = 0;
       scoreboard.style.display = "none";
       startButton.style.display = "block";
       scoreboard.textContent = "0" + score;
-      msg = new SpeechSynthesisUtterance("You have failed");
-      window.speechSynthesis.speak(msg);
-      if (hardModeStatus == false && score == easyHighScoreValue) {
-        msg = new SpeechSynthesisUtterance("New High Score");
-        window.speechSynthesis.speak(msg);
+      if (muted == 0) {
+        audio = new Audio("no.wav");
+        audio.play();
       }
-      if (hardModeStatus == true && score == easyHighScoreValue) {
+      if (hardModeStatus == false && score == localStorage.easyHighScoreValue) {
+        msg = new SpeechSynthesisUtterance("New High Score");
+        if (muted == 0) {
+          audio = new Audio("highscore.wav");
+          audio.play();
+          setTimeout(function() {
+            window.speechSynthesis.speak(msg);
+          }, 1000);
+        }
+      }
+      if (hardModeStatus == true && score == localStorage.hardHighScoreValue) {
         msg = new SpeechSynthesisUtterance("New Hard Mode High Score");
-        window.speechSynthesis.speak(msg);
+        if (muted == 0) {
+          audio = new Audio("highscore.wav");
+          audio.play();
+          setTimeout(function() {
+            window.speechSynthesis.speak(msg);
+          }, 1000);
+        }
       }
       gameinProgress = false;
       playerValues = [];
