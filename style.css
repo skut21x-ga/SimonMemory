@@ -16,7 +16,6 @@ body {
 }
 
 .overlay {
-  /*transformationto match the background */
   transform: rotate(90deg);
 }
 
@@ -285,7 +284,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0px 0px 5px 2px;
+  box-shadow: 0px 0px 2px 2px;
   position: absolute;
   margin-top: 325px;
   text-shadow: 0px 0px 10px red;

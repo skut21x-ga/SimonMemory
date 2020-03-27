@@ -34,6 +34,7 @@ hardHighScoreField.textContent = localStorage.hardHighScoreValue;
 var audio = "";
 let gameOver = document.querySelector(".gameOverDiv");
 gameOver.style.display = "none";
+let background = document.querySelector("body");
 
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
@@ -55,12 +56,16 @@ function unclick() {
 
 // Easy Mode Start
 function easyModeActivate() {
+  background.style.backgroundImage = "url(background.png)";
+
+  background.style.backgroundSize = "130vw";
   startButton.textContent = "START";
   unclick();
   let msg = new SpeechSynthesisUtterance("Easy Mode");
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
+
   overlay.setAttribute("id", "nonAnimatedDiv");
   scoreboard.style.display = "block";
   startButton.style.display = "none";
@@ -134,6 +139,8 @@ function displayLeft() {
 
 function hardModeActivate() {
   score = 0;
+  background.style.backgroundImage = "url(backgroundhard.png)";
+  background.style.backgroundSize = "1500px";
   let msg = new SpeechSynthesisUtterance("Hard Mode");
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
