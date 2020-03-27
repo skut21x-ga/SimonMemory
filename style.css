@@ -16,6 +16,11 @@ body {
   height: 100%;
 }
 
+.overlay {
+  /*should i keep this transformation to match the background */
+  transform: rotate(90deg);
+}
+
 #gameButtonName {
   height: 100vh;
   float: center;
