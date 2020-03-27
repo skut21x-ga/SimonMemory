@@ -1,14 +1,13 @@
 * {
   box-sizing: border-box;
   text-align: center;
-  font-family: Arial, Arial, sans-serif;
 }
 
 body {
   background-image: url("background.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 120vw;
+  background-size: 130vw;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -30,6 +29,7 @@ body {
 }
 
 .gameTitle {
+  font-family: "Orbitron";
   font-size: 30px;
   width: 50%;
   height: 120%;
@@ -252,7 +252,6 @@ body {
 }
 
 .easyHighScoreValue {
-  background-color: black;
   color: white;
   margin-left: 10px;
   padding-bottom: 40px;
@@ -264,7 +263,6 @@ body {
   font-size: 20px;
   position: absolute;
   color: white;
-  background: black;
   height: 40px;
   width: 190px;
   display: flex;
@@ -273,7 +271,6 @@ body {
 }
 
 .hardHighScoreValue {
-  background-color: black;
   color: white;
   margin-left: 10px;
   padding-bottom: 40px;
