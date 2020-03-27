@@ -1,17 +1,14 @@
-let activatedDiv = document.querySelector(".inactive");
-let topColor = (activatedDiv.style.borderTopColor = "red");
-topColor.value = 0;
-let rightColor = (activatedDiv.style.borderRightColor = "blue");
-rightColor.value = 1;
-let bottomColor = (activatedDiv.style.borderBottomColor = "gold");
-bottomColor.value = 2;
-let leftColor = (activatedDiv.style.borderLeftColor = "green");
-leftColor.value = 3;
-let msg = "";
+let topColor = document.querySelector(".red");
+let topActiveColor = document.querySelector(".active-red");
+let rightColor = document.querySelector(".blue");
+let rightActiveColor = document.querySelector(".active-blue");
+let bottomColor = document.querySelector(".yellow");
+let bottomActiveColor = document.querySelector(".active-yellow");
+let leftColor = document.querySelector(".green");
+let leftActiveColor = document.querySelector(".active-green");
 let easyMode = document.querySelector(".easyMode");
-let overlay = document.querySelector("#overlay");
-let gridbox = document.querySelectorAll(".gridbox");
 let hardMode = document.querySelector(".hardMode");
+let overlay = document.querySelector(".overlay");
 let computerValues = [];
 let playerValues = [];
 let hardModeStatus = false;
@@ -20,33 +17,34 @@ let score = 0;
 let scoreboard = document.querySelector(".scoreboard");
 let randomNumber = null;
 let round = 0;
-let startButton = document.querySelector(".starter");
+let startButton = document.querySelector(".startCircle");
 let gameinProgress = false;
-let highScore = document.querySelector(".highScoreValue");
-highScore = 0;
+let highScoreValue = document.querySelector(".highScoreValue");
+highScoreValue = localStorage.getItem("highScoreValue");
 
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
-msg = new SpeechSynthesisUtterance("Welcome");
+let msg = new SpeechSynthesisUtterance("Welcome");
 window.speechSynthesis.speak(msg);
+unclick();
 
 // Reset Board Colors
 function unclick() {
-  topColor = activatedDiv.style.borderTopColor = "red";
-  rightColor = activatedDiv.style.borderRightColor = "blue";
-  bottomColor = activatedDiv.style.borderBottomColor = "gold";
-  leftColor = activatedDiv.style.borderLeftColor = "green";
+  topActiveColor.style.display = "none";
+  rightActiveColor.style.display = "none";
+  bottomActiveColor.style.display = "none";
+  leftActiveColor.style.display = "none";
+  topColor.style.display = "block";
+  rightColor.style.display = "block";
+  bottomColor.style.display = "block";
+  leftColor.style.display = "block";
 }
 
 // Easy Mode Start
 function easyModeActivate() {
-  console.log("test");
   startButton.textContent = "START";
-  topColor = activatedDiv.style.borderTopColor = "red";
-  rightColor = activatedDiv.style.borderRightColor = "blue";
-  bottomColor = activatedDiv.style.borderBottomColor = "gold";
-  leftColor = activatedDiv.style.borderLeftColor = "green";
-  activatedDiv.setAttribute("id", "nonAnimatedDiv");
+  unclick();
+  overlay.setAttribute("id", "nonAnimatedDiv");
   scoreboard.style.display = "block";
   startButton.style.display = "none";
   hardModeStatus = false;
@@ -62,9 +60,10 @@ function easyModeActivate() {
 function displayTop() {
   unclick();
   if (gameinProgress == true) {
-    topColor = activatedDiv.style.borderTopColor = "hotpink";
+    topActiveColor.style.display = "block";
+    topColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("red");
-    setInterval(unclick, 1000);
+    setInterval(unclick, 2000);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
@@ -75,9 +74,10 @@ function displayTop() {
 function displayRight() {
   unclick();
   if (gameinProgress == true) {
-    rightColor = activatedDiv.style.borderRightColor = "lightblue";
+    rightActiveColor.style.display = "block";
+    rightColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("blue");
-    setInterval(unclick, 1000);
+    setInterval(unclick, 2000);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
@@ -88,9 +88,10 @@ function displayRight() {
 function displayBottom() {
   unclick();
   if (gameinProgress == true) {
-    bottomColor = activatedDiv.style.borderBottomColor = "yellow";
+    bottomActiveColor.style.display = "block";
+    bottomColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("yellow");
-    setInterval(unclick, 1000);
+    setInterval(unclick, 2000);
     if (muted == 0) {
       window.speechSynthesis.speak(msg);
     }
@@ -102,7 +103,8 @@ function displayBottom() {
 function displayLeft() {
   unclick();
   if (gameinProgress == true) {
-    leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
+    leftActiveColor.style.display = "block";
+    leftColor.style.display = "none";
     msg = new SpeechSynthesisUtterance("green");
     setInterval(unclick, 1000);
     if (muted == 0) {
@@ -115,7 +117,7 @@ function displayLeft() {
 
 function hardModeActivate() {
   score = 0;
-  activatedDiv.setAttribute("id", "animatedDiv");
+  overlay.setAttribute("id", "animatedDiv");
   scoreboard.textContent = "0" + score;
   scoreboard.style.display = "block";
   startButton.style.display = "none";
@@ -126,73 +128,13 @@ function hardModeActivate() {
   computerTurn();
 }
 
-[
-  gridbox[2],
-  gridbox[3],
-  gridbox[9],
-  gridbox[10],
-  gridbox[11],
-  gridbox[16],
-  gridbox[17],
-  gridbox[18],
-  gridbox[19],
-  gridbox[24],
-  gridbox[25],
-  gridbox[26]
-].forEach(function(element) {
-  element.addEventListener("click", displayTop);
-});
+topColor.addEventListener("click", displayTop);
 
-[
-  gridbox[4],
-  gridbox[5],
-  gridbox[12],
-  gridbox[13],
-  gridbox[14],
-  gridbox[20],
-  gridbox[21],
-  gridbox[22],
-  gridbox[23],
-  gridbox[29],
-  gridbox[30],
-  gridbox[31]
-].forEach(function(element) {
-  element.addEventListener("click", displayRight);
-});
+rightColor.addEventListener("click", displayRight);
 
-[
-  gridbox[37],
-  gridbox[38],
-  gridbox[39],
-  gridbox[44],
-  gridbox[45],
-  gridbox[46],
-  gridbox[47],
-  gridbox[52],
-  gridbox[53],
-  gridbox[54],
-  gridbox[60],
-  gridbox[61]
-].forEach(function(element) {
-  element.addEventListener("click", displayBottom);
-});
+bottomColor.addEventListener("click", displayBottom);
 
-[
-  gridbox[32],
-  gridbox[33],
-  gridbox[34],
-  gridbox[40],
-  gridbox[41],
-  gridbox[42],
-  gridbox[43],
-  gridbox[49],
-  gridbox[50],
-  gridbox[51],
-  gridbox[58],
-  gridbox[59]
-].forEach(function(element) {
-  element.addEventListener("click", displayLeft);
-});
+leftColor.addEventListener("click", displayLeft);
 
 hardMode.addEventListener("click", hardModeActivate);
 easyMode.addEventListener("click", easyModeActivate);
@@ -256,37 +198,37 @@ function computerTurn() {
 // functions for computer to display its colors
 
 function computerTop() {
-  unclick();
-  topColor = activatedDiv.style.borderTopColor = "hotpink";
+  topActiveColor.style.display = "block";
+  topColor.style.display = "none";
   msg = new SpeechSynthesisUtterance("red");
-  setInterval(unclick, 5000);
+  setInterval(unclick, 3000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
 }
 function computerRight() {
-  unclick();
-  rightColor = activatedDiv.style.borderRightColor = "lightblue";
+  rightActiveColor.style.display = "block";
+  rightColor.style.display = "none";
   msg = new SpeechSynthesisUtterance("blue");
-  setInterval(unclick, 5000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
+  setInterval(unclick, 3000);
 }
 function computerBottom() {
-  unclick();
-  bottomColor = activatedDiv.style.borderBottomColor = "yellow";
+  bottomActiveColor.style.display = "block";
+  bottomColor.style.display = "none";
   msg = new SpeechSynthesisUtterance("yellow");
-  setInterval(unclick, 5000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
+  setInterval(unclick, 3000);
 }
 function computerLeft() {
-  unclick();
-  leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
+  leftActiveColor.style.display = "block";
+  leftColor.style.display = "none";
   msg = new SpeechSynthesisUtterance("green");
-  setInterval(unclick, 5000);
+  setInterval(unclick, 3000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -294,7 +236,6 @@ function computerLeft() {
 
 function startGame() {
   startButton.style.display = "none";
-
   msg = new SpeechSynthesisUtterance("Let's Begin with ");
   setInterval(unclick, 200);
   scoreboard.style.display = "block";
@@ -309,27 +250,22 @@ function startGame() {
 }
 
 //start game button listener
-[gridbox[27], gridbox[28], gridbox[35], gridbox[36], startButton].forEach(
-  function(element) {
-    element.addEventListener("click", startGame);
-  }
-);
+startButton.addEventListener("click", startGame);
 
 //scoreboard functions
 function increaseScore(x) {
   x += 1;
   if (x < 10) {
     scoreboard.textContent = "0" + x;
-    scoreboard.style.marginLeft = "220px";
   } else if (x < 20) {
     scoreboard.textContent = x;
-    scoreboard.style.marginLeft = "-36px";
+    scoreboard.style.marginLeft = "0";
   } else if (x < 100) {
     scoreboard.textContent = x;
-    scoreboard.style.marginLeft = "-48px";
+    scoreboard.style.marginLeft = "0";
   } else if (x >= 100) {
     scoreboard.textContent = x;
-    scoreboard.style.marginLeft = "-60px";
+    scoreboard.style.marginLeft = "-10";
   }
   return x;
 }
@@ -340,7 +276,6 @@ function roundCheck(x) {
     if (JSON.stringify(playerValues) == JSON.stringify(computerValues)) {
       console.log("Correct");
       msg = new SpeechSynthesisUtterance("Correct.....");
-
       window.speechSynthesis.speak(msg);
       score = increaseScore(score);
       playerValues = [];
@@ -359,9 +294,12 @@ function roundCheck(x) {
   }
 }
 
-//need to add sound upon round win and interval spacing.
-//win game logic? high score?
-
-if (score > localStorage.getItem("highScore")) {
-  localStorage.setItem("highscore", score);
+if (highScoreValue !== null) {
+  if (score > highScoreValue) {
+    localStorage.setItem("highScoreValue", score);
+  }
+} else {
+  localStorage.setItem("highScoreValue", score);
 }
+
+localStorage.getItem("highScoreValue");

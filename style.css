@@ -1,17 +1,18 @@
 * {
   box-sizing: border-box;
   text-align: center;
+  font-family: "Times New Roman", Times, serif;
 }
 
 body {
   background-image: url("background.png");
   background-repeat: no-repeat;
   background-position: center;
-  justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  height: 100%;
 }
 
 #gameButtonName {
@@ -38,25 +39,6 @@ body {
   background-color: black;
 }
 
-.gameBackground {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.simonModule {
-  border-radius: 100%;
-  height: 550px;
-  width: 550px;
-  border: 10px solid black;
-  box-shadow: 0px 0px 20px 5px black;
-  margin: -5px;
-  padding: 0px;
-  background-color: rgb(228, 16, 16, 0.6);
-  background-color: black;
-}
-
 .inactive {
   border-left: 175px solid transparent;
   border-right: 175px solid transparent;
@@ -70,18 +52,6 @@ body {
   margin-left: -5px;
   padding: 20px;
   box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 1);
-
-  /* transform: rotate(-45deg); */
-  /* remove transform when done setting values of grid */
-}
-
-.centerButton {
-  height: 111%;
-  width: 111%;
-  border-radius: 100%;
-  margin-top: -10px;
-  margin-left: -8px;
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 1);
 }
 
 .easyMode {
@@ -114,29 +84,6 @@ body {
   position: absolute;
 }
 
-#overlay {
-  display: inline-grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-  height: 575px;
-  width: 575px;
-  /* This code is purely to see grid to assign colors to divs
-  border: 10px solid black;
-  box-shadow: 0px 0px 20px 5px black;
-  background-color: rgba(255, 255, 255, 0.1);
-  */
-  margin-left: -288px;
-  margin-top: -390px;
-  position: fixed;
-  transform: rotate(45deg);
-}
-
-/* .gridbox {
-// This code is purely to see grid to assign colors to divs
- border: 0.25px solid black;
- 
-} */
-
 /* ROTATE CODE FROM https://stackoverflow.com/questions/6410730/css-endless-rotation-animation  */
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {
@@ -164,8 +111,8 @@ body {
   }
 }
 #animatedDiv {
-  -webkit-animation: rotating 5s linear infinite;
-  animation: rotating 5s linear infinite;
+  -webkit-animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
 }
 
 #nonAnimatedDiv {
@@ -206,18 +153,72 @@ body {
   font-size: 60px;
   font-stretch: expanded;
   position: absolute;
-  margin-top: 185px;
-  margin-left: 216px;
   text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
   color: white;
   background: black;
 }
 
-.starter {
+.simonCircle {
   font-size: 40px;
-  margin-top: 9px;
+  position: fixed;
+  border: 1px solid black;
+  border-radius: 100%;
+  height: 150px;
+  width: 150px;
+  box-shadow: 0px 0px 10px 15px black;
+  display: block;
+  background-color: black;
+}
+
+.gameBackground {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.backgroundCircle1 {
   position: absolute;
-  margin-left: 8px;
+  border: 7px solid black;
+  border-radius: 100%;
+  height: 575px;
+  width: 575px;
+  box-shadow: 0px 0px 50px 1px black;
+  display: block;
+  margin-top: 293px;
+  background-color: transparent;
+  z-index: -1;
+}
+
+.backgroundCircle2 {
+  position: absolute;
+  border: 5px solid black;
+  border-radius: 100%;
+  height: 575px;
+  width: 575px;
+  box-shadow: 0px 0px 20px 10px black;
+  display: block;
+  margin-top: 293px;
+  background-color: transparent;
+  z-index: -1;
+}
+
+.middlegfx {
+  height: 190px;
+  width: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin-top: 285px;
+  background-color: transparent;
+}
+
+.startCircle {
+  font-size: 40px;
+  position: fixed;
   border: 1px solid black;
   border-radius: 100%;
   height: 150px;
@@ -231,7 +232,6 @@ body {
   font-size: 30px;
   position: fixed;
   margin-left: 350px;
-  /* //shadow code from https://codepen.io/Trinca/pen/XKwKby */
   box-shadow: 0px 0px 20px 5px black;
   background-color: black;
   border: 2px solid black;
@@ -244,7 +244,6 @@ body {
   justify-content: center;
   padding-top: 18px;
   border: 1px solid black;
-  box-shadow: 0px 0px 10px 4px black;
 }
 
 .highScoreValue {
@@ -252,7 +251,6 @@ body {
   font-size: 30px;
   position: fixed;
   margin-left: 430px;
-  /* //shadow code from https://codepen.io/Trinca/pen/XKwKby */
   background-color: black;
   text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
   color: white;
