@@ -24,7 +24,6 @@ body {
 
 .gameTitle {
   font-size: 30px;
-  background-color: white;
   width: 50%;
   height: 120%;
   border: 2px solid black;
@@ -33,7 +32,10 @@ body {
   margin-top: 10px;
   text-align: center;
   justify-content: center;
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  color: white;
   align-items: center;
+  background-color: black;
 }
 
 .gameBackground {
@@ -52,6 +54,7 @@ body {
   margin: -5px;
   padding: 0px;
   background-color: rgb(228, 16, 16, 0.6);
+  background-color: black;
 }
 
 .inactive {
@@ -67,6 +70,7 @@ body {
   margin-left: -5px;
   padding: 20px;
   box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 1);
+
   /* transform: rotate(-45deg); */
   /* remove transform when done setting values of grid */
 }
@@ -85,7 +89,10 @@ body {
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0px 0px 20px 5px black;
-  background-color: white;
+  background-color: black;
+  border: 2px solid black;
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  color: white;
   margin-top: 50px;
   margin-left: -450px;
   position: absolute;
@@ -93,11 +100,15 @@ body {
 
 .hardMode {
   height: 40px;
-  width: 140px;
+  width: 160px;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0px 0px 20px 5px black;
-  background-color: white;
+  box-shadow: 0px 0px 20px 5px black;
+  background-color: black;
+  border: 2px solid black;
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  color: white;
   margin-left: 310px;
   margin-top: 50px;
   position: absolute;
@@ -165,20 +176,25 @@ body {
 .muteButton {
   margin-top: 100px;
   height: 40px;
-  box-shadow: 0px 0px 20px 5px black;
+  box-shadow: 0px 0px 20px 5px white;
   background-color: white;
   position: absolute;
   margin-left: -33px;
+
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }
 
 .unmuteButton {
   margin-top: 100px;
   margin-left: -33px;
   height: 40px;
-  box-shadow: 0px 0px 20px 5px black;
+  box-shadow: 0px 0px 20px 5px white;
   background-color: white;
   display: none;
   position: absolute;
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }
 
 body {
@@ -192,12 +208,9 @@ body {
   position: absolute;
   margin-top: 185px;
   margin-left: 216px;
-  /* //shadow code from https://codepen.io/Trinca/pen/XKwKby */
-  text-shadow: -0.1vw 0vw 0.1vw #fed128, -0.15vw 0vw 0.2vw #fed128,
-    -0.2vw 0vw 0.2vw #fed128, -0.1vw 0vw 3vw #f0130b, -0.2vw 0vw 3vw #f0130b,
-    -0.4vw 0vw 3vw #f0130b, -0.1vw 0vw 5vw #f0130b, -0.2vw 0vw 5vw #f0130b,
-    -0.4vw 0vw 0.8vw #f0130b, 0.2vw 0vw 10vw #f0130b;
-  color: rgb(255, 245, 170);
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  color: white;
+  background: black;
 }
 
 .starter {
@@ -219,10 +232,11 @@ body {
   position: fixed;
   margin-left: 350px;
   /* //shadow code from https://codepen.io/Trinca/pen/XKwKby */
-  text-shadow: -0.1vw 0vw 0.1vw #fed128, -0.2vw 0vw 0.2vw #fed128,
-    -0.1vw 0vw 3vw #f0130b, -0.2vw 0vw 3vw #f0130b, -0.4vw 0vw 3vw #f0130b,
-    -0.1vw 0vw 5vw #f0130b, -0.4vw 0vw 0.8vw #f0130b, 0.2vw 0vw 10vw #f0130b;
-  color: rgb(255, 245, 170);
+  box-shadow: 0px 0px 20px 5px black;
+  background-color: black;
+  border: 2px solid black;
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  color: white;
   background: black;
   height: 100px;
   width: 200px;
@@ -239,11 +253,9 @@ body {
   position: fixed;
   margin-left: 430px;
   /* //shadow code from https://codepen.io/Trinca/pen/XKwKby */
-  text-shadow: -0.1vw 0vw 0.1vw #fed128, -0.15vw 0vw 0.2vw #fed128,
-    -0.2vw 0vw 0.2vw #fed128, -0.1vw 0vw 3vw #f0130b, -0.2vw 0vw 3vw #f0130b,
-    -0.4vw 0vw 3vw #f0130b, -0.1vw 0vw 5vw #f0130b, -0.2vw 0vw 5vw #f0130b,
-    -0.4vw 0vw 0.8vw #f0130b, 0.2vw 0vw 10vw #f0130b;
-  color: rgb(255, 245, 170);
+  background-color: black;
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  color: white;
   display: flex;
   justify-content: center;
 }

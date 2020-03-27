@@ -13,7 +13,3 @@ https://codereview.stackexchange.com/questions/157895/create-multiple-divs-insid
 document.write('<div class="gridbox" value='+i+'>'+ i.toString() + '</div>');
 
 Setup 4 DIVS if have time instead of gridding
-
-Bonus
-Add timer-based scoring
-Track scores across games (even if the page is reloaded)

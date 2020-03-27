@@ -22,8 +22,8 @@ let randomNumber = null;
 let round = 0;
 let startButton = document.querySelector(".starter");
 let gameinProgress = false;
-let highScroe = document.querySelector(".highscore");
-let highScore = 0;
+let highScore = document.querySelector(".highScoreValue");
+highScore = 0;
 
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
@@ -259,7 +259,7 @@ function computerTop() {
   unclick();
   topColor = activatedDiv.style.borderTopColor = "hotpink";
   msg = new SpeechSynthesisUtterance("red");
-  setInterval(unclick, 1500);
+  setInterval(unclick, 5000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -268,7 +268,7 @@ function computerRight() {
   unclick();
   rightColor = activatedDiv.style.borderRightColor = "lightblue";
   msg = new SpeechSynthesisUtterance("blue");
-  setInterval(unclick, 1500);
+  setInterval(unclick, 5000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -277,7 +277,7 @@ function computerBottom() {
   unclick();
   bottomColor = activatedDiv.style.borderBottomColor = "yellow";
   msg = new SpeechSynthesisUtterance("yellow");
-  setInterval(unclick, 1500);
+  setInterval(unclick, 5000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -286,7 +286,7 @@ function computerLeft() {
   unclick();
   leftColor = activatedDiv.style.borderLeftColor = "lightgreen";
   msg = new SpeechSynthesisUtterance("green");
-  setInterval(unclick, 1500);
+  setInterval(unclick, 5000);
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
   }
@@ -295,8 +295,8 @@ function computerLeft() {
 function startGame() {
   startButton.style.display = "none";
 
-  msg = new SpeechSynthesisUtterance("  .  .");
-  setInterval(unclick, 600);
+  msg = new SpeechSynthesisUtterance("Let's Begin with ");
+  setInterval(unclick, 200);
   scoreboard.style.display = "block";
   if (muted == 0) {
     window.speechSynthesis.speak(msg);
@@ -320,7 +320,7 @@ function increaseScore(x) {
   x += 1;
   if (x < 10) {
     scoreboard.textContent = "0" + x;
-    scoreboard.style.marginLeft = "235px";
+    scoreboard.style.marginLeft = "220px";
   } else if (x < 20) {
     scoreboard.textContent = x;
     scoreboard.style.marginLeft = "-36px";
@@ -338,10 +338,13 @@ function increaseScore(x) {
 function roundCheck(x) {
   if (playerValues.length == computerValues.length) {
     if (JSON.stringify(playerValues) == JSON.stringify(computerValues)) {
-      console.log("Correct. Next Round");
+      console.log("Correct");
+      msg = new SpeechSynthesisUtterance("Correct.....");
+
+      window.speechSynthesis.speak(msg);
       score = increaseScore(score);
       playerValues = [];
-      computerTurn();
+      setInterval(computerTurn(), 2000);
     } else {
       console.log("FAIL");
       score = 0;
@@ -356,4 +359,9 @@ function roundCheck(x) {
   }
 }
 
+//need to add sound upon round win and interval spacing.
 //win game logic? high score?
+
+if (score > localStorage.getItem("highScore")) {
+  localStorage.setItem("highscore", score);
+}
