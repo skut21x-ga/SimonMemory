@@ -1,13 +1,14 @@
 * {
   box-sizing: border-box;
   text-align: center;
-  font-family: "Times New Roman", Times, serif;
+  font-family: Arial, Arial, sans-serif;
 }
 
 body {
   background-image: url("background.png");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 120vw;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -52,36 +53,6 @@ body {
   margin-left: -5px;
   padding: 20px;
   box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 1);
-}
-
-.easyMode {
-  height: 40px;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0px 0px 20px 5px black;
-  background-color: black;
-  border: 2px solid black;
-  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
-  color: white;
-  margin-top: 50px;
-  margin-left: -450px;
-  position: absolute;
-}
-
-.hardMode {
-  height: 40px;
-  width: 160px;
-  font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0px 0px 20px 5px black;
-  box-shadow: 0px 0px 20px 5px black;
-  background-color: black;
-  border: 2px solid black;
-  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
-  color: white;
-  margin-left: 310px;
-  margin-top: 50px;
-  position: absolute;
 }
 
 /* ROTATE CODE FROM https://stackoverflow.com/questions/6410730/css-endless-rotation-animation  */
@@ -217,7 +188,8 @@ body {
 }
 
 .startCircle {
-  font-size: 40px;
+  font-size: 30px;
+  text-shadow: 0px 1px 5px;
   position: fixed;
   border: 1px solid black;
   border-radius: 100%;
@@ -227,33 +199,77 @@ body {
   display: block;
 }
 
-.highScoreTitle {
-  margin-top: -300px;
-  font-size: 30px;
-  position: fixed;
-  margin-left: 350px;
-  box-shadow: 0px 0px 20px 5px black;
+.easyMode {
+  height: 40px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 20px 5px white;
   background-color: black;
   border: 2px solid black;
   text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
   color: white;
-  background: black;
-  height: 100px;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  padding-top: 18px;
-  border: 1px solid black;
+  margin-top: 50px;
+  margin-left: -457px;
+  position: absolute;
+  -webkit-filter: invert(1);
+  width: 150px;
+  filter: invert(1);
 }
 
-.highScoreValue {
-  margin-top: -250px;
-  font-size: 30px;
-  position: fixed;
-  margin-left: 430px;
+.hardMode {
+  height: 40px;
+  width: 160px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 20px 5px white;
   background-color: black;
-  text-shadow: -0.1vw 0vw 0.1vw white, -0.2vw 0vw 3vw #f0130b;
+  border: 2px solid black;
+  text-shadow: -0.1vw 0vw 0.1vw white, -0.1vw 0vw 3vw #f0130b;
   color: white;
+  margin-left: 310px;
+  margin-top: 50px;
+  position: absolute;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+
+.easyHighScoreTitle {
+  margin-top: 780px;
+  margin-left: -382px;
+  font-size: 20px;
+  position: absolute;
+  color: white;
+  height: 40px;
+  width: 190px;
   display: flex;
   justify-content: center;
+  padding-bottom: 60px;
+}
+
+.easyHighScoreValue {
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+  padding-bottom: 40px;
+}
+
+.hardHighScoreTitle {
+  margin-top: 780px;
+  margin-left: 389px;
+  font-size: 20px;
+  position: absolute;
+  color: white;
+  background: black;
+  height: 40px;
+  width: 190px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 60px;
+}
+
+.hardHighScoreValue {
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+  padding-bottom: 40px;
 }

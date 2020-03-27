@@ -1,3 +1,4 @@
+//svg simon board variables
 let topColor = document.querySelector(".red");
 let topActiveColor = document.querySelector(".active-red");
 let rightColor = document.querySelector(".blue");
@@ -6,21 +7,30 @@ let bottomColor = document.querySelector(".yellow");
 let bottomActiveColor = document.querySelector(".active-yellow");
 let leftColor = document.querySelector(".green");
 let leftActiveColor = document.querySelector(".active-green");
-let easyMode = document.querySelector(".easyMode");
-let hardMode = document.querySelector(".hardMode");
+let muted = 0;
 let overlay = document.querySelector(".overlay");
+// mode variables
+let hardMode = document.querySelector(".hardMode");
+let hardModeStatus = false;
+let easyMode = document.querySelector(".easyMode");
+//scoring variables
 let computerValues = [];
 let playerValues = [];
-let hardModeStatus = false;
-let muted = 0;
-let score = 0;
+let score = "";
 let scoreboard = document.querySelector(".scoreboard");
 let randomNumber = null;
 let round = 0;
 let startButton = document.querySelector(".startCircle");
 let gameinProgress = false;
-let highScoreValue = document.querySelector(".highScoreValue");
-highScoreValue = localStorage.getItem("highScoreValue");
+//high score variables//
+let easyHighScoreField = document.querySelector(".easyHighScoreValue");
+let easyHighScoreValue = "";
+let hardHighScoreField = document.querySelector(".hardHighScoreValue");
+let hardHighScoreValue = "";
+localStorage.setItem("hardHighScoreValue", 5);
+localStorage.setItem("easyHighScoreValue", 7);
+easyHighScoreField.textContent = localStorage.easyHighScoreValue;
+hardHighScoreField.textContent = localStorage.hardHighScoreValue;
 
 //Best Voices: Daniel, Karen, Tessa (british)
 //https://codepen.io/matt-west/full/wGzuJ
@@ -44,6 +54,8 @@ function unclick() {
 function easyModeActivate() {
   startButton.textContent = "START";
   unclick();
+  let msg = new SpeechSynthesisUtterance("Easy Mode");
+  window.speechSynthesis.speak(msg);
   overlay.setAttribute("id", "nonAnimatedDiv");
   scoreboard.style.display = "block";
   startButton.style.display = "none";
@@ -117,6 +129,8 @@ function displayLeft() {
 
 function hardModeActivate() {
   score = 0;
+  let msg = new SpeechSynthesisUtterance("Hard Mode");
+  window.speechSynthesis.speak(msg);
   overlay.setAttribute("id", "animatedDiv");
   scoreboard.textContent = "0" + score;
   scoreboard.style.display = "block";
@@ -278,28 +292,38 @@ function roundCheck(x) {
       msg = new SpeechSynthesisUtterance("Correct.....");
       window.speechSynthesis.speak(msg);
       score = increaseScore(score);
+      checkHighScore();
       playerValues = [];
       setInterval(computerTurn(), 2000);
     } else {
       console.log("FAIL");
+      checkHighScore();
       score = 0;
       scoreboard.style.display = "none";
       startButton.style.display = "block";
       scoreboard.textContent = "0" + score;
       msg = new SpeechSynthesisUtterance("You have failed");
       window.speechSynthesis.speak(msg);
+      if (hardModeStatus == false && score == easyHighScoreValue) {
+        msg = new SpeechSynthesisUtterance("New High Score");
+        window.speechSynthesis.speak(msg);
+      }
+      if (hardModeStatus == true && score == easyHighScoreValue) {
+        msg = new SpeechSynthesisUtterance("New Hard Mode High Score");
+        window.speechSynthesis.speak(msg);
+      }
       gameinProgress = false;
       playerValues = [];
     }
   }
 }
-
-if (highScoreValue !== null) {
-  if (score > highScoreValue) {
-    localStorage.setItem("highScoreValue", score);
+function checkHighScore() {
+  if (hardModeStatus == false && score > localStorage.easyHighScoreValue) {
+    localStorage.setItem("easyHighScoreValue", score);
+    easyHighScoreField.textContent = localStorage.easyHighScoreValue;
   }
-} else {
-  localStorage.setItem("highScoreValue", score);
+  if (hardModeStatus == true && score > localStorage.hardHighScoreValue) {
+    localStorage.setItem("hardHighScoreValue", score);
+    hardHighScoreField.textContent = localStorage.hardHighScoreValue;
+  }
 }
-
-localStorage.getItem("highScoreValue");

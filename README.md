@@ -18,6 +18,6 @@ https://wallpaperaccess.com/
 
 Current known problems:
 
-- High Score not functioning
-- Computer turn colors are too fast
-- No visual message upon losing
+- Computer changing colors too fast visually (making hard mode impossible on mute)
+- possibly not accesible for color blind individuals
+- No visual message upon losing unless high score
